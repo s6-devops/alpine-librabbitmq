@@ -3,18 +3,19 @@
 pkgname=librabbitmq
 pkgver=0.7.1
 pkgrel=0
-pkgdesc=""
-url=""
+pkgdesc="RabbitMQ C Client"
+url="https://github.com/alanxz/rabbitmq-c"
 arch="all"
-license=""
+license="MIT"
 depends="openssl"
 depends_dev="openssl-dev"
 makedepends="$depends_dev"
 install=""
-subpackages="$pkgname-dev $pkgname-doc"
-source="https://github.com/alanxz/rabbitmq-c/archive/v$pkgver.tar.gz"
+subpackages=""
+source="https://github.com/alanxz/rabbitmq-c/releases/download/v$pkgver/rabbitmq-c-$pkgver.tar.gz"
 
-_builddir=
+_builddir=${srcdir}/rabbitmq-c-${pkgver}
+_pkgdir=${srcdir}
 prepare() {
 	local i
 	cd "$_builddir"
@@ -27,12 +28,17 @@ prepare() {
 
 build() {
 	cd "$_builddir"
+	mkdir build
+	cd build
+	cmake -DCMAKE_INSTALL_PREFIX=$pkgdir ..
 }
 
 package() {
 	cd "$_builddir"
+	cd build
+	cmake --build . --target install
 }
 
-md5sums="c40427844e7a2b94f9687fa7606829ee  v0.7.1.tar.gz"
-sha256sums="0b9b81d05b3e629c3449521690de400fe4539a8ba1feacadcbd6e9a50c8a4625  v0.7.1.tar.gz"
-sha512sums="63cca5e0022d7e655438c0701b55ac49de1702e4324ef1cf335801e4699ca8bfc2268836b7694fa0a0d2ba4d1f7f0408f64c9c4d5e6e23d99d26d2c1c7f00211  v0.7.1.tar.gz"
+md5sums="6216c8876299a5efc4ff5ff84dc636d8  rabbitmq-c-0.7.1.tar.gz"
+sha256sums="23df349a7d157543e756acc67e47b217843ecbdafaefe3e4974073bb99d8a26d  rabbitmq-c-0.7.1.tar.gz"
+sha512sums="197b8476373e3a9056d5f24e0d932a37a556a946d2b6471c95e8b0e693b611de51882be4911bd099f2c2e76153225d83cac1bec8106c031058315f062a8a4ab4  rabbitmq-c-0.7.1.tar.gz"
