@@ -15,7 +15,6 @@ subpackages="$pkgname-dev"
 source="https://github.com/alanxz/rabbitmq-c/releases/download/v$pkgver/rabbitmq-c-$pkgver.tar.gz"
 
 _builddir=${srcdir}/rabbitmq-c-${pkgver}
-_pkgdir=${srcdir}
 prepare() {
 	local i
 	cd "$_builddir"
@@ -30,7 +29,7 @@ build() {
 	cd "$_builddir"
 	mkdir build
 	cd build
-	cmake -DCMAKE_INSTALL_PREFIX=$pkgdir ..
+	cmake -DCMAKE_INSTALL_PREFIX=$pkgdir/usr ..
 }
 
 package() {
