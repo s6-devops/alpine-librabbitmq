@@ -11,7 +11,7 @@ depends="openssl"
 depends_dev="openssl-dev"
 makedepends="$depends_dev"
 install=""
-subpackages=""
+subpackages="$pkgname-dev"
 source="https://github.com/alanxz/rabbitmq-c/releases/download/v$pkgver/rabbitmq-c-$pkgver.tar.gz"
 
 _builddir=${srcdir}/rabbitmq-c-${pkgver}
